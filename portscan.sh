@@ -47,7 +47,7 @@ NMAP_PORTS=$(echo $PORTS | sed 's/ /,/g')
 
 printf "[*] Starting nmap scan on %s on ports %s..\n" ${TARGET} ${NMAP_PORTS}
 
-nmap -A -sV -p ${NMAP_PORTS} -oA ${OUTFILE} ${TARGET}
+nmap -sC -sV -p ${NMAP_PORTS} -oA ${OUTFILE} ${TARGET}
 
 
 
