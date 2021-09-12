@@ -7,7 +7,7 @@ NMAP_OPTS="--script default,version,vuln"
 
 usage() {
 	(>&2 echo -e "$0\nScan a host with masscan and nmap")
-	(>&2 echo -e "Usage: $0 -t <TARGET IP> -o <OUTPUT FILE>")	
+	(>&2 echo -e "Usage: $0 -t <TARGET IP> -o <OUTPUT FILE> [-i <interface>] [-r rate]")	
 }
 
 
@@ -65,7 +65,7 @@ if [[ "X${NMAP_TCP_PORTS}" != "X" ]];then
 	nmap ${NMAP_OPTS} -e ${IFACE} -p ${NMAP_TCP_PORTS} -oA "${OUTFILE}.tcp" ${TARGET}
 elif [[ "X${NMAP_UDP_PORTS}" != "X" ]];then
 	printf "[*] Starting nmap UDP scan on %s on ports %s..\n" ${TARGET} ${NMAP_UDP_PORTS}
-	nmap ${NMAP_OPTS} -e ${IFACE} -p ${NMAP_UDP_PORTS} -oA "${OUTFILE}.udp" ${TARGET}
+	nmap -sU ${NMAP_OPTS} -e ${IFACE} -p ${NMAP_UDP_PORTS} -oA "${OUTFILE}.udp" ${TARGET}
 fi
 
 
